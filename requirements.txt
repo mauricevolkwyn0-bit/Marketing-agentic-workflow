@@ -3,14 +3,16 @@ python-dotenv==1.0.0
 fastapi==0.108.0
 uvicorn==0.25.0
 
-# AI - UPDATE THESE
-openai==1.12.0
-anthropic==0.8.1
+# AI (Python 3.12 safe)
+openai>=1.30.0
+anthropic>=0.18.0
+httpx>=0.25.2,<0.28
 
-# Database
-psycopg2-binary==2.9.9
-sqlalchemy==2.0.23
+# Database (modern Postgres)
+psycopg[binary]==3.1.18
+sqlalchemy==2.0.25
 
 # Utilities
-requests==2.31.0
-pydantic==2.5.0
+pydantic>=2.6.0
+orjson>=3.9.15
+tenacity>=8.2.3
