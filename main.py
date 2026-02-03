@@ -97,6 +97,13 @@ async def generate_content(platform: str, topic: str):
         "status": "generated"
     }
 
+@app.post("/init-database")
+async def init_database():
+    """Initialize database tables"""
+    from init_database import create_tables
+    create_tables()
+    return {"status": "Database initialized"}
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
