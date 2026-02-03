@@ -6,6 +6,19 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 import os
 from dotenv import load_dotenv
+from agents.copywriting_agent import CopywritingAgent
+
+# Initialize agent
+copywriting_agent = CopywritingAgent()
+
+@app.post("/generate-script")
+async def generate_script(topic: str):
+    """Generate TikTok script using AI"""
+    try:
+        result = copywriting_agent.generate_tiktok_script(topic)
+        return result
+    except Exception as e:
+        return {"error": str(e)}
 
 load_dotenv()
 
@@ -103,6 +116,15 @@ async def init_database():
     from init_database import create_tables
     create_tables()
     return {"status": "Database initialized"}
+
+@app.post("/generate-script")
+async def generate_script(topic: str):
+    """Generate TikTok script using AI"""
+    try:
+        result = copywriting_agent.generate_tiktok_script(topic)
+        return result
+    except Exception as e:
+        return {"error": str(e)}
 
 if __name__ == "__main__":
     import uvicorn
