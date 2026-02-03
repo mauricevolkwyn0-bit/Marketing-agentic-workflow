@@ -6,23 +6,16 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 import os
 from dotenv import load_dotenv
-from agents.copywriting_agent import CopywritingAgent
 
-# Initialize agent
-copywriting_agent = CopywritingAgent()
-
-@app.post("/generate-script")
-async def generate_script(topic: str):
-    """Generate TikTok script using AI"""
-    try:
-        result = copywriting_agent.generate_tiktok_script(topic)
-        return result
-    except Exception as e:
-        return {"error": str(e)}
-
+# Load environment variables FIRST
 load_dotenv()
 
+# Create app SECOND
 app = FastAPI(title="Just Work AI Marketing System")
+
+# Import and initialize agent THIRD (after app exists)
+from agents.copywriting_agent import CopywritingAgent
+copywriting_agent = CopywritingAgent()
 
 @app.get("/")
 async def root():
@@ -88,7 +81,6 @@ async def health():
 @app.get("/agents")
 async def agents_status():
     """Check agent status"""
-    # This will be replaced with real agent status
     return {
         "agents": {
             "copywriting": "ready",
@@ -102,7 +94,6 @@ async def agents_status():
 @app.post("/generate-content")
 async def generate_content(platform: str, topic: str):
     """Generate marketing content"""
-    # Placeholder - will be replaced with real AI generation
     return {
         "platform": platform,
         "topic": topic,
