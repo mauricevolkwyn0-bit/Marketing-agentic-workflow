@@ -1,0 +1,16 @@
+# Core
+python-dotenv==1.0.0
+fastapi==0.108.0
+uvicorn==0.25.0
+
+# AI
+openai==1.6.1
+anthropic==0.8.1
+
+# Database
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.23
+
+# Utilities
+requests==2.31.0
+pydantic==2.5.0
